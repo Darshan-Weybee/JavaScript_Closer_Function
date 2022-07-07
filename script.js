@@ -171,3 +171,55 @@ function addTax1(rate){
 console.log(addTax1(0.1)(100));
 console.log(addTax1(0.1)(100));
 
+// Imediate Function Expression
+(function(){
+    console.log("This will run");
+})();
+
+(() => console.log("This will alos run"))();
+
+// closures function
+const secureBooking = function(){
+    let passengerCount = 0;
+
+    return function(){
+        passengerCount++;
+        console.log(`${passengerCount} passenger`);
+    };
+};
+const booker = secureBooking();
+booker();
+booker();
+booker();
+
+console.dir(booker);
+
+let f;
+const g = function(){
+    const a = 23;
+    f = function(){
+        console.log(a*2);
+    }
+}
+const h = function(){
+    const b = 32;
+    f = function(){
+        console.log(b*2);
+    }
+}
+g();
+f();
+
+h();
+f();
+
+const boardPassenger = function(n, wait){
+    const perGroup = n/3;
+
+    setTimeout(function(){
+        console.log(`We are now boarding all ${n} passenger`);
+        console.log(`There are 3 groups, each with ${perGroup} passengers`);
+    },wait*1000);
+    console.log(`Will start boarding in ${wait} seconds`);
+};
+boardPassenger(180, 5);

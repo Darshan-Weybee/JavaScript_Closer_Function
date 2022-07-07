@@ -6,17 +6,27 @@ const poll = {
 
 poll.registerNewAnswer = function(){
     const input = Number(prompt(`What is your favourite programming language? ${"\n"} ${this.options.join("\n")} ${"\n"} (Write option number)`));
-    if(input < 4){
+    if(typeof input == "number" && input < this.answers.length){
         this.answers[input]++;
     }
-    let [a,b,c,d] = poll.answers;
-    console.log(a,b,c,d);
-    const str = `Poll results are ${a,b,c,d}`;
-    this.displayResults(str);
+    // let [a,b,c,d] = poll.answers;
+    // console.log(a,b,c,d);
+    // const str = `Poll results are ${a,b,c,d}`;
+    this.displayResults();
+    this.displayResults("string");
 };
 
 document.querySelector(".poll").addEventListener("click", poll.registerNewAnswer.bind(poll));
 
-poll.displayResults = function(result = poll.answers){
-    console.log(result);
+poll.displayResults = function(type = "array"){
+    if(type == "array")
+         console.log(this.answers);
+    else if(type == "string")
+         console.log(`Poll results are ${this.answers.join(", ")}`);
 }
+
+poll.displayResults.call({answers: [5, 2, 3]});
+poll.displayResults.call({answers: [5, 2, 3]}, "string");
+
+poll.displayResults.call({answers: [1, 5, 3, 9, 6, 1]});
+poll.displayResults.call({answers: [1, 5, 3, 9, 6, 1]}, "string");
